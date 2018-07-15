@@ -1,5 +1,6 @@
 package com.xuexiang.xhttpapi.controller;
 
+import com.xuexiang.xhttpapi.api.ApiResult;
 import com.xuexiang.xhttpapi.model.User;
 import com.xuexiang.xhttpapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +26,22 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/add", produces = {"application/json;charset=UTF-8"})
-    public boolean addUser(User user){
-        return userService.addUser(user);
+    public ApiResult addUser(User user){
+        ApiResult<Boolean> result = new ApiResult<>();
+        return result.setData(userService.addUser(user));
     }
 
     @ResponseBody
     @RequestMapping(value = "/all/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
-    public List<User> findAllUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
-        return userService.findAllUser(pageNum,pageSize);
+    public ApiResult findAllUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
+        ApiResult<List<User>> result = new ApiResult<>();
+        return result.setData(userService.findAllUser(pageNum,pageSize));
     }
 
     @ResponseBody
     @RequestMapping(value = "/all")
-    public List<User> findAllUser(){
-        return userService.findAllUser();
+    public ApiResult findAllUser() {
+        ApiResult<List<User>> result = new ApiResult<>();
+        return result.setData(userService.findAllUser());
     }
 }
