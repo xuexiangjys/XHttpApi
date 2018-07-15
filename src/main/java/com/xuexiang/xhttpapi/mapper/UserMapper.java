@@ -4,7 +4,6 @@ import com.xuexiang.xhttpapi.model.User;
 import java.util.List;
 
 public interface UserMapper {
-
     int deleteByPrimaryKey(Integer userId);
 
     int insert(User record);
