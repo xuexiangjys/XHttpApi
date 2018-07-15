@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xuexiang.xhttpapi.mapper.BookMapper">
-  <resultMap id="BaseResultMap" type="com.xuexiang.xhttpapi.model.Book">
-    <id column="book_id" jdbcType="INTEGER" property="bookId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="price" jdbcType="REAL" property="price" />
-    <result column="author" jdbcType="VARCHAR" property="author" />
-    <result column="sales_volume" jdbcType="INTEGER" property="salesVolume" />
-    <result column="score" jdbcType="INTEGER" property="score" />
-    <result column="mark" jdbcType="INTEGER" property="mark" />
-    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuexiang.xhttpapi.mapper.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.xuexiang.xhttpapi.model.Book" >
+    <id column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="sales_volume" property="salesVolume" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="mark" property="mark" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from book
     where book_id = #{bookId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xuexiang.xhttpapi.model.Book">
+  <insert id="insert" parameterType="com.xuexiang.xhttpapi.model.Book" >
     insert into book (book_id, name, price, 
       author, sales_volume, score, 
       mark, description)
@@ -23,7 +23,7 @@
       #{author,jdbcType=VARCHAR}, #{salesVolume,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, 
       #{mark,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.xuexiang.xhttpapi.model.Book">
+  <update id="updateByPrimaryKey" parameterType="com.xuexiang.xhttpapi.model.Book" >
     update book
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=REAL},
@@ -34,55 +34,13 @@
       description = #{description,jdbcType=LONGVARCHAR}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select book_id, name, price, author, sales_volume, score, mark, description
     from book
     where book_id = #{bookId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="BaseResultMap" >
     select book_id, name, price, author, sales_volume, score, mark, description
-    from book
-  </select>
-  <resultMap id="BaseResultMap" type="com.xuexiang.xhttpapi.model.Book">
-    <id column="book_id" jdbcType="INTEGER" property="bookId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="price" jdbcType="REAL" property="price" />
-    <result column="author" jdbcType="VARCHAR" property="author" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="sales_volume" jdbcType="INTEGER" property="salesVolume" />
-    <result column="score" jdbcType="INTEGER" property="score" />
-    <result column="mark" jdbcType="INTEGER" property="mark" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from book
-    where book_id = #{bookId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.xuexiang.xhttpapi.model.Book">
-    insert into book (book_id, name, price, 
-      author, description, sales_volume, 
-      score, mark)
-    values (#{bookId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
-      #{author,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{salesVolume,jdbcType=INTEGER}, 
-      #{score,jdbcType=INTEGER}, #{mark,jdbcType=INTEGER})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.xuexiang.xhttpapi.model.Book">
-    update book
-    set name = #{name,jdbcType=VARCHAR},
-      price = #{price,jdbcType=REAL},
-      author = #{author,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      sales_volume = #{salesVolume,jdbcType=INTEGER},
-      score = #{score,jdbcType=INTEGER},
-      mark = #{mark,jdbcType=INTEGER}
-    where book_id = #{bookId,jdbcType=INTEGER}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select book_id, name, price, author, description, sales_volume, score, mark
-    from book
-    where book_id = #{bookId,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select book_id, name, price, author, description, sales_volume, score, mark
     from book
   </select>
 </mapper>
