@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuexiang.xhttpapi.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.xuexiang.xhttpapi.model.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xuexiang.xhttpapi.model.User" >
+    insert into user (user_id, name, gender, 
+      age, phone)
+    values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xuexiang.xhttpapi.model.User" >
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select user_id, name, gender, age, phone
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select user_id, name, gender, age, phone
+    from user
+  </select>
+</mapper>
