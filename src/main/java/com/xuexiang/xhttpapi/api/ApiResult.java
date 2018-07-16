@@ -16,6 +16,8 @@
 
 package com.xuexiang.xhttpapi.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * 提供的默认的标注返回api
  *
@@ -27,8 +29,11 @@ public class ApiResult<T> {
     public final static String MSG = "Msg";
     public final static String DATA = "Data";
 
+    @JsonProperty(value = CODE)
     private int Code = 0;
+    @JsonProperty(value = MSG)
     private String Msg = "";
+    @JsonProperty(value = DATA)
     private T Data;
 
     public int getCode() {

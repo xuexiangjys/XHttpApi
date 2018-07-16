@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuexiang.xhttpapi.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.xuexiang.xhttpapi.model.Order" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xuexiang.xhttpapi.model.Order" >
+    insert into order (order_id, book_id, user_id, 
+      time, number)
+    values (#{orderId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{number,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xuexiang.xhttpapi.model.Order" >
+    update order
+    set book_id = #{bookId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      number = #{number,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select order_id, book_id, user_id, time, number
+    from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select order_id, book_id, user_id, time, number
+    from order
+  </select>
+  <select id="queryOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+   select order_id, book_id, user_id, time, number
+    from order
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </select>
+</mapper>
