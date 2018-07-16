@@ -30,21 +30,31 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public ApiResult addUser(@RequestBody AddUserReq addUserReq) {
-        ApiResult<Boolean> result = new ApiResult<>();
-        return result.setData(userService.addUser(addUserReq.user));
+        return new ApiResult<Boolean>().setData(userService.addUser(addUserReq.user));
     }
 
     @ResponseBody
     @RequestMapping(value = "/getAllUser/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
     public ApiResult findAllUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
-        ApiResult<List<User>> result = new ApiResult<>();
-        return result.setData(userService.findAllUser(pageNum, pageSize));
+        return new ApiResult<List<User>>().setData(userService.findAllUser(pageNum, pageSize));
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getAllUser", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/getAllUser", method = RequestMethod.GET)
     public ApiResult findAllUser() {
-        ApiResult<List<User>> result = new ApiResult<>();
-        return result.setData(userService.findAllUser());
+        return new ApiResult<List<User>>().setData(userService.findAllUser());
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public ApiResult deleteUser(int userId) {
+        return new ApiResult<Boolean>().setData(userService.deleteUser(userId));
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public ApiResult updateUser(@RequestBody User user) {
+        return new ApiResult<Boolean>().setData(userService.updateUser(user));
     }
 }
