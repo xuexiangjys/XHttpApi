@@ -35,6 +35,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book findBookById(int bookId) {
+        return bookMapper.selectByPrimaryKey(bookId);
+    }
+
+    @Override
     public List<Book> findAllBook(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return bookMapper.selectAll();

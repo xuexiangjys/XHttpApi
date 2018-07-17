@@ -18,6 +18,8 @@ public interface BookService {
 
     boolean updateBook(Book record);
 
+    Book findBookById(int bookId);
+
     List<Book> findAllBook(int pageNum, int pageSize);
 
     List<Book> findAllBook();
