@@ -2,10 +2,9 @@ package com.xuexiang.xhttpapi.controller;
 
 import com.xuexiang.xhttpapi.api.ApiResult;
 import com.xuexiang.xhttpapi.model.User;
-import com.xuexiang.xhttpapi.model.request.AddUserReq;
+import com.xuexiang.xhttpapi.api.request.AddUserReq;
 import com.xuexiang.xhttpapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

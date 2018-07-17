@@ -1,6 +1,7 @@
 package com.xuexiang.xhttpapi.mapper;
 
 import com.xuexiang.xhttpapi.model.Book;
+
 import java.util.List;
 
 public interface BookMapper {

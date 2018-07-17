@@ -10,6 +10,7 @@
     <result column="score" property="score" jdbcType="INTEGER" />
     <result column="mark" property="mark" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="picture" property="picture" jdbcType="LONGVARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from book
@@ -18,10 +19,12 @@
   <insert id="insert" parameterType="com.xuexiang.xhttpapi.model.Book" >
     insert into book (book_id, name, price, 
       author, sales_volume, score, 
-      mark, description)
+      mark, description, picture
+      )
     values (#{bookId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
       #{author,jdbcType=VARCHAR}, #{salesVolume,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, 
-      #{mark,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR})
+      #{mark,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR}, #{picture,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xuexiang.xhttpapi.model.Book" >
     update book
@@ -31,16 +34,17 @@
       sales_volume = #{salesVolume,jdbcType=INTEGER},
       score = #{score,jdbcType=INTEGER},
       mark = #{mark,jdbcType=INTEGER},
-      description = #{description,jdbcType=LONGVARCHAR}
+      description = #{description,jdbcType=LONGVARCHAR},
+      picture = #{picture,jdbcType=LONGVARCHAR}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select book_id, name, price, author, sales_volume, score, mark, description
+    select book_id, name, price, author, sales_volume, score, mark, description, picture
     from book
     where book_id = #{bookId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select book_id, name, price, author, sales_volume, score, mark, description
+    select book_id, name, price, author, sales_volume, score, mark, description, picture
     from book
   </select>
 </mapper>

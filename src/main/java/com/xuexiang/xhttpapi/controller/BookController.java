@@ -4,7 +4,6 @@ import com.xuexiang.xhttpapi.api.ApiResult;
 import com.xuexiang.xhttpapi.model.Book;
 import com.xuexiang.xhttpapi.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

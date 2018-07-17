@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuexiang.xhttpapi.mapper.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.xuexiang.xhttpapi.model.OrderInfo" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_info
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xuexiang.xhttpapi.model.OrderInfo" >
+    insert into order_info (order_id, user_id, book_id, 
+      number, time)
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xuexiang.xhttpapi.model.OrderInfo" >
+    update order_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      book_id = #{bookId,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      time = #{time,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select order_id, user_id, book_id, number, time
+    from order_info
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select order_id, user_id, book_id, number, time
+    from order_info
+  </select>
+  <select id="queryOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select order_id, user_id, book_id, number, time
+    from order_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+</mapper>

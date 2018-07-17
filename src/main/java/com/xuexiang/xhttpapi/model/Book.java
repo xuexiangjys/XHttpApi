@@ -17,6 +17,8 @@ public class Book {
 
     private String description;
 
+    private String picture;
+
     public Integer getBookId() {
         return bookId;
     }
@@ -79,5 +81,13 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 }

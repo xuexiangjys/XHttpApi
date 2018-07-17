@@ -1,4 +1,4 @@
-package com.xuexiang.xhttpapi.model.request;
+package com.xuexiang.xhttpapi.api.request;
 
 import com.xuexiang.xhttpapi.model.User;
 

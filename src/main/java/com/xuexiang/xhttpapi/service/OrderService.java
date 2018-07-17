@@ -1,6 +1,6 @@
 package com.xuexiang.xhttpapi.service;
 
-import com.xuexiang.xhttpapi.model.Order;
+import com.xuexiang.xhttpapi.model.OrderInfo;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public interface OrderService {
      * @param order
      * @return
      */
-    boolean addOrder(Order order);
+    boolean addOrder(OrderInfo order);
 
     /**
      * 删除订单
@@ -34,7 +34,7 @@ public interface OrderService {
      * @param record
      * @return
      */
-    boolean updateOrder(Order record);
+    boolean updateOrder(OrderInfo record);
 
     /**
      * 分页查询所有订单
@@ -43,20 +43,20 @@ public interface OrderService {
      * @param pageSize
      * @return
      */
-    List<Order> findAllOrder(int pageNum, int pageSize);
+    List<OrderInfo> findAllOrder(int pageNum, int pageSize);
 
     /**
      * 查询所有订单
      *
      * @return
      */
-    List<Order> findAllOrder();
+    List<OrderInfo> findAllOrder();
 
     /**
      * 查询用户的所有订单
      * @param userId
      * @return
      */
-    List<Order> queryOrder(int userId);
+    List<OrderInfo> queryOrder(int userId);
 
 }
