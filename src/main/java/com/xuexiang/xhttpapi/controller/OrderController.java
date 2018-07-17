@@ -13,7 +13,7 @@ import java.util.List;
  * @author xuexiang
  * @since 2018/7/16 下午2:30
  */
-@Controller
+@RestController
 @RequestMapping(value = "/order", produces = {"application/json;charset=UTF-8"})
 public class OrderController {
 

@@ -16,7 +16,7 @@ import java.util.List;
  * @author xuexiang
  * @since 2018/7/15 下午11:23
  */
-@Controller
+@RestController
 @RequestMapping(value = "/user")
 public class UserController {
 

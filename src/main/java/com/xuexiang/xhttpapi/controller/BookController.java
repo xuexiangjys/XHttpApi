@@ -13,7 +13,7 @@ import java.util.List;
  * @author xuexiang
  * @since 2018/7/16 上午11:22
  */
-@Controller
+@RestController
 @RequestMapping(value = "/book")
 public class BookController {
 
