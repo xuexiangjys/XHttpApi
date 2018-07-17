@@ -16,6 +16,7 @@
 
 package com.xuexiang.xhttpapi.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -25,39 +26,42 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @since 2018/5/22 下午4:22
  */
 public class ApiResult<T> {
-    public final static String CODE = "Code";
-    public final static String MSG = "Msg";
-    public final static String DATA = "Data";
 
-    @JsonProperty(value = CODE)
+    @JsonProperty(value = "Code")
     private int Code = 0;
-    @JsonProperty(value = MSG)
+    @JsonProperty(value = "Msg")
     private String Msg = "";
-    @JsonProperty(value = DATA)
+    @JsonProperty(value = "Data")
     private T Data;
 
+    @JsonIgnore
     public int getCode() {
         return Code;
     }
 
+    @JsonIgnore
     public ApiResult setCode(int code) {
         Code = code;
         return this;
     }
 
+    @JsonIgnore
     public String getMsg() {
         return Msg;
     }
 
+    @JsonIgnore
     public ApiResult setMsg(String msg) {
         Msg = msg;
         return this;
     }
 
+    @JsonIgnore
     public T getData() {
         return Data;
     }
 
+    @JsonIgnore
     public ApiResult setData(T data) {
         Data = data;
         return this;
