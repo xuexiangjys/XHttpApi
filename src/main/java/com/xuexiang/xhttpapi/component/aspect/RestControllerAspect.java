@@ -1,4 +1,4 @@
-package com.xuexiang.xhttpapi.aspectj;
+package com.xuexiang.xhttpapi.component.aspect;
 
 import com.xuexiang.xhttpapi.utils.AspectJUtils;
 import com.xuexiang.xhttpapi.utils.IpUtils;
@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
-public class RestControllerAspectJ {
+public class RestControllerAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

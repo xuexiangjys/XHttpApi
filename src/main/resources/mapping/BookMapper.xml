@@ -35,7 +35,11 @@
       score = #{score,jdbcType=INTEGER},
       mark = #{mark,jdbcType=INTEGER},
       description = #{description,jdbcType=LONGVARCHAR},
-      picture = #{picture,jdbcType=LONGVARCHAR}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updatePictureByBookId" parameterType="com.xuexiang.xhttpapi.model.Book" >
+    update book
+    set picture = #{picture,jdbcType=LONGVARCHAR}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xuexiang.xhttpapi.api;
+package com.xuexiang.xhttpapi.api.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

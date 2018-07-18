@@ -14,4 +14,6 @@ public interface BookMapper {
     List<Book> selectAll();
 
     int updateByPrimaryKey(Book record);
+
+    int updatePictureByBookId(Book record);
 }

@@ -35,6 +35,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public boolean updatePictureByBookId(Book record) {
+        return bookMapper.updatePictureByBookId(record) > 0;
+    }
+
+    @Override
     public Book findBookById(int bookId) {
         return bookMapper.selectByPrimaryKey(bookId);
     }

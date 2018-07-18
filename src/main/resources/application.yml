@@ -23,6 +23,17 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    http:
+        multipart:
+            max-file-size: 10MB
+            max-request-size: 100MB
+    servlet:
+        multipart:
+            enabled: true
+            file-size-threshold: 2KB
+            max-file-size: 10MB
+            max-request-size: 100MB
+
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.xuexiang.xhttpapi.model
@@ -33,3 +44,8 @@ pagehelper:
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+
+
+upload:
+  file-directory: ./uploads
+  keep-name: true

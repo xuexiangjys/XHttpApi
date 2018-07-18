@@ -1,6 +1,6 @@
 package com.xuexiang.xhttpapi.controller;
 
-import com.xuexiang.xhttpapi.api.ApiResult;
+import com.xuexiang.xhttpapi.api.response.ApiResult;
 import com.xuexiang.xhttpapi.model.Book;
 import com.xuexiang.xhttpapi.model.OrderInfo;
 import com.xuexiang.xhttpapi.service.BookService;

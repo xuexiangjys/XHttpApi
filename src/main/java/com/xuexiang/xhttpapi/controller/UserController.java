@@ -1,8 +1,8 @@
 package com.xuexiang.xhttpapi.controller;
 
-import com.xuexiang.xhttpapi.api.ApiResult;
+import com.xuexiang.xhttpapi.api.response.ApiResult;
 import com.xuexiang.xhttpapi.model.User;
-import com.xuexiang.xhttpapi.api.request.AddUserReq;
+import com.xuexiang.xhttpapi.api.request.ApiRequest;
 import com.xuexiang.xhttpapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +23,13 @@ public class UserController {
     private UserService userService;
 
     /**
-     * @param addUserReq
+     * @param request
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public ApiResult addUser(@RequestBody AddUserReq addUserReq) {
-        return new ApiResult<Boolean>().setData(userService.addUser(addUserReq.user));
+    public ApiResult addUser(@RequestBody ApiRequest<User> request) {
+        return new ApiResult<Boolean>().setData(userService.addUser(request.request));
     }
 
     @ResponseBody

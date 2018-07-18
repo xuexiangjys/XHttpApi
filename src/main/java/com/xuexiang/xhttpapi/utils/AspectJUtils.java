@@ -16,10 +16,10 @@ import java.util.List;
  * @author xuexiang
  * @since 2018/7/17 上午10:34
  */
-public class AspectJUtils {
+public final class AspectJUtils {
 
     private AspectJUtils() {
-
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     /**
