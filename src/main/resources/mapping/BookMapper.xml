@@ -34,7 +34,7 @@
       sales_volume = #{salesVolume,jdbcType=INTEGER},
       score = #{score,jdbcType=INTEGER},
       mark = #{mark,jdbcType=INTEGER},
-      description = #{description,jdbcType=LONGVARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
     where book_id = #{bookId,jdbcType=INTEGER}
   </update>
   <update id="updatePictureByBookId" parameterType="com.xuexiang.xhttpapi.model.Book" >
