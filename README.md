@@ -33,7 +33,7 @@ git clone https://github.com/xuexiangjys/XHttpApi.git
 
 * MySql安装完成后，请执行根目录下`sql`文件夹下的脚本，创建数据库表和内容。
 
-* 配置`src/main/resources/application.yml`文件，包括服务端口、数据库配置、mybatis配置等。
+* 配置`src/main/resources/application.yml`文件，包括服务端口、数据库配置、mybatis配置、文件上传配置等。
 
 * 如果你需要使用mybatis的自动生成代码脚本`generator`，请配置`src/main/resources/init.properties`文件。
 
