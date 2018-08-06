@@ -51,4 +51,19 @@ public interface UserService {
      * @return
      */
     List<User> findAllUser();
+
+    /**
+     * 根据账户名找到用户信息
+     * @param loginName
+     * @return
+     */
+    User findUserByAccount(String loginName);
+
+    /**
+     * 用户登陆
+     * @param loginName
+     * @param password
+     * @return
+     */
+    User login(String loginName, String password);
 }

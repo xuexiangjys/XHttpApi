@@ -29,14 +29,36 @@ public class ApiException extends Exception {
      * 约定异常
      */
     public static class ERROR {
+
+        /**
+         * Token失效，需要重新获取token的code码
+         */
+        public static final int TOKEN_INVALID = 100;
+        /**
+         * 认证失败
+         */
+        public static final int AUTH_ERROR = TOKEN_INVALID + 1;
+        /**
+         * 缺少Token
+         */
+        public static final int TOKEN_MISSING = AUTH_ERROR + 1;
+
+
         /**
          * 未知错误
          */
         public static final int UNKNOWN = 5000;
 
         /**
+         * 一般性业务错误
+         */
+        public static final int COMMON_BUSINESS_ERROR = UNKNOWN + 1;
+
+        /**
          * 文件存储失败
          */
-        public static final int FILE_STORE_ERROR = UNKNOWN + 1;
+        public static final int FILE_STORE_ERROR = COMMON_BUSINESS_ERROR + 1;
+
+
     }
 }

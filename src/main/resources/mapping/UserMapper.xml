@@ -3,6 +3,8 @@
 <mapper namespace="com.xuexiang.xhttpapi.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="com.xuexiang.xhttpapi.model.User" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="INTEGER" />
     <result column="age" property="age" jdbcType="INTEGER" />
@@ -13,26 +15,42 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xuexiang.xhttpapi.model.User" >
-    insert into user (user_id, name, gender, 
-      age, phone)
-    values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
-      #{age,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR})
+    insert into user (user_id, login_name, password, 
+      name, gender, age, 
+      phone)
+    values (#{userId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.xuexiang.xhttpapi.model.User" >
     update user
-    set name = #{name,jdbcType=VARCHAR},
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=INTEGER},
       age = #{age,jdbcType=INTEGER},
       phone = #{phone,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select user_id, name, gender, age, phone
+    select user_id, login_name, password, name, gender, age, phone
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select user_id, name, gender, age, phone
+    select user_id, login_name, password, name, gender, age, phone
     from user
+  </select>
+  <select id="findUserByAccount" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select user_id, login_name, password, name, gender, age, phone
+    from user
+    where login_name = #{loginName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="login" resultMap="BaseResultMap" parameterType="map">
+    select user_id, login_name, password, name, gender, age, phone
+    from user
+    where login_name = #{loginName,jdbcType=VARCHAR}
+    and password = #{password,jdbcType=VARCHAR}
   </select>
 </mapper>

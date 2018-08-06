@@ -1,6 +1,8 @@
 package com.xuexiang.xhttpapi.mapper;
 
 import com.xuexiang.xhttpapi.model.User;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface UserMapper {
@@ -13,4 +15,8 @@ public interface UserMapper {
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
+
+    User findUserByAccount(String loginName);
+
+    User login(@Param("loginName") String loginName, @Param("password") String password);
 }
