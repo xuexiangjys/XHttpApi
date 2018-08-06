@@ -24,12 +24,15 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `login_name` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL DEFAULT '123456',
   `name` varchar(45) NOT NULL,
   `gender` int(11) NOT NULL DEFAULT '1',
   `age` int(11) NOT NULL DEFAULT '0',
   `phone` tinytext NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `login_name_UNIQUE` (`login_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +41,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'薛翔',1,24,'13813823453'),(3,'美雪',2,20,'13817834234'),(4,'王小丫',2,45,'17482954839'),(6,'hsrytxvniphjul',2,62,'43385781816'),(7,'bicaypmebv',2,60,'71320135160'),(8,'jzbzehfiouse',2,77,'13012082637'),(9,'nxwljumxqh',2,97,'71362289207'),(11,'bc',2,25,'93684867318'),(14,'jijzeyxz',2,99,'36027362539'),(15,'xxxxxxxxxxx',2,1000,'11111111111111'),(16,'oggaymvyiuoko',2,7,'40779778325'),(18,'hcwwuvwt',1,34,'00986596263'),(20,'nzdavkzojezq',2,23,'99150397457'),(21,'zpqlqtnavmmpyd',2,35,'20255732486'),(23,'zflwfnngnyjjozj',1,37,'84342210170'),(26,'kuvibqmogvcb',1,90,'57718284190'),(27,'zrkudohc',1,74,'27628260327'),(28,'lrjadjtnsaltonc',1,11,'25310759357'),(29,'kporgjuckqlyb',2,19,'02403757199'),(30,'tjcklwkrcu',1,87,'72546060000'),(31,'djlnatkowfeosb',1,30,'52863177462'),(32,'cxvbgssg',1,37,'25908268291');
+INSERT INTO `user` VALUES (1,'xuexiang','123456','薛翔',1,24,'13813823453'),(2,'meixue','123456','美雪',2,20,'13817834234'),(3,'wangxiaoya','123456','王小丫',2,45,'17482954839'),(4,'xuexin','123456','薛欣',2,59,'1111112222233333');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-19 10:05:47
+-- Dump completed on 2018-08-07  2:45:38
