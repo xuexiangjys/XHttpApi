@@ -1,7 +1,7 @@
 package com.xuexiang.xhttpapi.controller;
 
 import com.xuexiang.xhttpapi.api.response.ApiResult;
-import com.xuexiang.xhttpapi.api.response.UploadFileResponse;
+import com.xuexiang.xhttpapi.exception.ApiException;
 import com.xuexiang.xhttpapi.model.Book;
 import com.xuexiang.xhttpapi.service.BookService;
 import com.xuexiang.xhttpapi.service.FileStorageService;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+
+import static com.xuexiang.xhttpapi.exception.ApiException.ERROR.FILE_STORE_ERROR;
+import static com.xuexiang.xhttpapi.exception.ApiException.ERROR.UNKNOWN;
 
 /**
  * @author xuexiang
@@ -25,6 +28,16 @@ public class BookController {
 
     @Autowired
     private FileStorageService fileService;
+
+    /**
+     * 测试全局异常捕获返回处理
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public ApiResult testError() throws Exception {
+        throw new ApiException("测试失败", UNKNOWN);
+    }
 
     /**
      * 这里使用的是json直接注入接收，需要注意的是字段名一定要保持一致
@@ -57,7 +70,7 @@ public class BookController {
 
 
     @PostMapping("/uploadBookPicture")
-    public ApiResult uploadBookPicture(@RequestParam("file") MultipartFile file, @RequestParam("bookId") int bookId) {
+    public ApiResult uploadBookPicture(@RequestParam("file") MultipartFile file, @RequestParam("bookId") int bookId) throws Exception {
         ApiResult<Boolean> result = new ApiResult<>();
         try {
             String fileName = fileService.storeFile(file);
@@ -67,15 +80,11 @@ public class BookController {
                 book.setPicture(fileName);
                 result.setData(bookService.updatePictureByBookId(book));
             } else {
-                result.setCode(5000)
-                        .setMsg("图片上传失败")
-                        .setData(false);
+                throw new ApiException("图片上传失败", FILE_STORE_ERROR);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            result.setCode(5001)
-                    .setMsg(e.getMessage())
-                    .setData(false);
+            throw new ApiException(e, UNKNOWN);
         }
         return result;
     }
