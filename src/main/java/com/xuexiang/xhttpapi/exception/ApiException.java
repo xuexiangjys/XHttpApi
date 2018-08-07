@@ -59,6 +59,11 @@ public class ApiException extends Exception {
          */
         public static final int FILE_STORE_ERROR = COMMON_BUSINESS_ERROR + 1;
 
+        /**
+         * 请求超出限制
+         */
+        public static final int REQUEST_BEYOND_LIMIT = FILE_STORE_ERROR + 1;
+
 
     }
 }

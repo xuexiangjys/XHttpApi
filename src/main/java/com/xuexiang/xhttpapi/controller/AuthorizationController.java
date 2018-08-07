@@ -1,8 +1,8 @@
 package com.xuexiang.xhttpapi.controller;
 
-import com.xuexiang.xhttpapi.api.request.ApiRequest;
 import com.xuexiang.xhttpapi.api.response.ApiResult;
 import com.xuexiang.xhttpapi.api.response.LoginInfo;
+import com.xuexiang.xhttpapi.component.aspect.LimitedRequest;
 import com.xuexiang.xhttpapi.component.token.CurrentUser;
 import com.xuexiang.xhttpapi.component.token.LoginRequired;
 import com.xuexiang.xhttpapi.exception.ApiException;
@@ -60,6 +60,11 @@ public class AuthorizationController {
         return new ApiResult<User>().setData(user);
     }
 
-
+    @LimitedRequest
+    @ResponseBody
+    @RequestMapping(value = "/testLimitedRequest", method = RequestMethod.GET)
+    public ApiResult testLimitedRequest() throws Exception {
+        return new ApiResult<Boolean>().setData(true);
+    }
 
 }

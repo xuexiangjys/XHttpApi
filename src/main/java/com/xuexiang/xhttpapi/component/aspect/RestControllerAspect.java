@@ -47,7 +47,7 @@ public class RestControllerAspect {
 
         String userAgent = request.getHeader("user-agent");
         String ip = IpUtils.getRealIp(request);
-        String methodName = this.getMethodName(joinPoint);
+        String methodName = AspectJUtils.getMethodName(joinPoint);
         String params = AspectJUtils.getMethodParams(joinPoint);
 
         logger.info("\n\r" +
@@ -66,14 +66,7 @@ public class RestControllerAspect {
         return result;
     }
 
-    private String getMethodName(ProceedingJoinPoint joinPoint) {
-        String methodName = joinPoint.getSignature().toShortString();
-        String shortMethodNameSuffix = "(..)";
-        if (methodName.endsWith(shortMethodNameSuffix)) {
-            methodName = methodName.substring(0, methodName.length() - shortMethodNameSuffix.length());
-        }
-        return methodName;
-    }
+
 
 
     /**

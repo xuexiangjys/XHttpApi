@@ -2,7 +2,7 @@ package com.xuexiang.xhttpapi.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.JoinPoint;
 import org.assertj.core.util.Lists;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,12 +23,27 @@ public final class AspectJUtils {
     }
 
     /**
+     * 获取方法名
+     *
+     * @param joinPoint
+     * @return
+     */
+    public static String getMethodName(JoinPoint joinPoint) {
+        String methodName = joinPoint.getSignature().toShortString();
+        String shortMethodNameSuffix = "(..)";
+        if (methodName.endsWith(shortMethodNameSuffix)) {
+            methodName = methodName.substring(0, methodName.length() - shortMethodNameSuffix.length());
+        }
+        return methodName;
+    }
+
+    /**
      * 获取需要记录日志方法的参数，敏感参数用*代替
      *
      * @param joinPoint 切点
      * @return 去除敏感参数后的Json字符串
      */
-    public static String getMethodParams(ProceedingJoinPoint joinPoint) {
+    public static String getMethodParams(JoinPoint joinPoint) {
         Object[] arguments = joinPoint.getArgs();
         StringBuilder sb = new StringBuilder();
         if (arguments == null || arguments.length <= 0) {
