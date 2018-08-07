@@ -4,8 +4,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
@@ -83,6 +85,21 @@ public class TokenUtils {
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET))
                 .parseClaimsJws(jwt).getBody();
         return claims;
+    }
+
+
+    /**
+     * 从HttpServletRequest中解析出token
+     *
+     * @param request
+     * @return
+     */
+    public static String parseToken(HttpServletRequest request) {
+        String accessToken = request.getHeader("token");
+        if (StringUtils.isEmpty(accessToken)) {
+            accessToken = request.getParameter("token");
+        }
+        return accessToken;
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package com.xuexiang.xhttpapi.utils;
 
 import com.xuexiang.xhttpapi.component.aspect.LimitedRequest;
+import com.xuexiang.xhttpapi.component.token.QuickRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,36 @@ public class QuickRequestUtils {
     }
 
 
-    private static Map<String, Integer> redisTemplate = new HashMap<>();
+    /**
+     * 存放请求的次数
+     */
+    private static Map<String, Integer> sRequestCount = new HashMap<>();
+
+    /**
+     * 存放请求的时间戳
+     */
+    private static Map<String, Long> sRequestTimeStamp = new HashMap<>();
+
+    /**
+     * 是否是快速请求
+     *
+     * @param key
+     * @param quickRequest
+     * @param requestTimeStamp 请求携带的时间戳
+     * @return
+     */
+    public static boolean isQuickRequest(String key, QuickRequest quickRequest, String requestTimeStamp) {
+        long now = Long.valueOf(requestTimeStamp);
+        long lastRequestTimeStamp = sRequestTimeStamp.getOrDefault(key, 0L); //获取最后一次请求的时间戳
+        long timeD = now - lastRequestTimeStamp; //计算出间隔
+        if (0 < timeD && timeD < quickRequest.interval()) {
+            return true;
+        } else {
+            sRequestTimeStamp.put(key, now);
+            return false;
+        }
+    }
+
 
     /**
      * 是否是快速请求
@@ -30,19 +60,19 @@ public class QuickRequestUtils {
      * @return
      */
     public static boolean isQuickRequest(String key, LimitedRequest limit) {
-        int count = redisTemplate.getOrDefault(key, 0) + 1;
-        redisTemplate.put(key, count);
+        int count = sRequestCount.getOrDefault(key, 0) + 1;
+        sRequestCount.put(key, count);
 
         if (count > 0) {
             Timer timer = new Timer();
             TimerTask task = new TimerTask() { //创建一个新的计时器任务。
                 @Override
                 public void run() {
-                    int number = redisTemplate.getOrDefault(key, 0) - 1;
+                    int number = sRequestCount.getOrDefault(key, 0) - 1;
                     if (number > 0) {
-                        redisTemplate.put(key, number);
+                        sRequestCount.put(key, number);
                     } else {
-                        redisTemplate.remove(key);
+                        sRequestCount.remove(key);
                     }
                 }
             };

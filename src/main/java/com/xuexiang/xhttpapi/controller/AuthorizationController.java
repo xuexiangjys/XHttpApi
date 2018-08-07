@@ -5,6 +5,7 @@ import com.xuexiang.xhttpapi.api.response.LoginInfo;
 import com.xuexiang.xhttpapi.component.aspect.LimitedRequest;
 import com.xuexiang.xhttpapi.component.token.CurrentUser;
 import com.xuexiang.xhttpapi.component.token.LoginRequired;
+import com.xuexiang.xhttpapi.component.token.QuickRequest;
 import com.xuexiang.xhttpapi.exception.ApiException;
 import com.xuexiang.xhttpapi.model.User;
 import com.xuexiang.xhttpapi.service.UserService;
@@ -64,6 +65,13 @@ public class AuthorizationController {
     @ResponseBody
     @RequestMapping(value = "/testLimitedRequest", method = RequestMethod.GET)
     public ApiResult testLimitedRequest() throws Exception {
+        return new ApiResult<Boolean>().setData(true);
+    }
+
+    @QuickRequest
+    @ResponseBody
+    @RequestMapping(value = "/testQuickRequest", method = RequestMethod.GET)
+    public ApiResult testQuickRequest() throws Exception {
         return new ApiResult<Boolean>().setData(true);
     }
 

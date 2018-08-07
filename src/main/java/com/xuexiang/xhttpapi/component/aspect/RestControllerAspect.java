@@ -55,9 +55,9 @@ public class RestControllerAspect {
                 "           |请求参数:{} \n\r" +
                 "           |IP:{} \n\r" +
                 "           |userAgent:{}", methodName, params, ip, userAgent);
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         Object result = joinPoint.proceed();
-        long end = System.currentTimeMillis();
+        long end = System.nanoTime();
         String deleteSensitiveContent =  AspectJUtils.deleteSensitiveContent(result);
         logger.info("\n\r" +
                 "<----------|结束请求方法:{}\n\r" +

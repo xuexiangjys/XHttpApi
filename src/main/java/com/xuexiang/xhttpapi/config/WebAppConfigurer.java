@@ -2,6 +2,7 @@ package com.xuexiang.xhttpapi.config;
 
 import com.xuexiang.xhttpapi.component.token.AuthenticationInterceptor;
 import com.xuexiang.xhttpapi.component.token.CurrentUserMethodArgumentResolver;
+import com.xuexiang.xhttpapi.component.token.QuickRequestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -27,6 +28,10 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
         // excludePathPatterns 用户排除拦截
         registry.addInterceptor(authenticationInterceptor())
                 .addPathPatterns("/authorization/*");
+
+        registry.addInterceptor(quickRequestInterceptor())
+                .addPathPatterns("/authorization/*");
+
         super.addInterceptors(registry);
     }
 
@@ -49,6 +54,11 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public AuthenticationInterceptor authenticationInterceptor() {
         return new AuthenticationInterceptor();
+    }
+
+    @Bean
+    public QuickRequestInterceptor quickRequestInterceptor() {
+        return new QuickRequestInterceptor();
     }
 
 }
