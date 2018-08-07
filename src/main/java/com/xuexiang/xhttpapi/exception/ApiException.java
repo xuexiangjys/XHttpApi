@@ -35,13 +35,13 @@ public class ApiException extends Exception {
          */
         public static final int TOKEN_INVALID = 100;
         /**
-         * 认证失败
-         */
-        public static final int AUTH_ERROR = TOKEN_INVALID + 1;
-        /**
          * 缺少Token
          */
-        public static final int TOKEN_MISSING = AUTH_ERROR + 1;
+        public static final int TOKEN_MISSING = TOKEN_INVALID + 1;
+        /**
+         * 认证失败
+         */
+        public static final int AUTH_ERROR = TOKEN_MISSING + 1;
 
 
         /**

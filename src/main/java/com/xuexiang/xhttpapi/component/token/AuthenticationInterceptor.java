@@ -8,6 +8,7 @@ import com.xuexiang.xhttpapi.utils.TokenUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -49,10 +50,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             // 判断是否存在令牌信息，如果存在，则允许登录
             String accessToken = request.getHeader("token");
 
-            if (null == accessToken) {
+            if (StringUtils.isEmpty(accessToken)) {
                 accessToken = request.getParameter("token");
-                if (null == accessToken) {
-                    throw new ApiException("无token，请重新登录", TOKEN_MISSING);
+                if (StringUtils.isEmpty(accessToken)) {
+                    throw new ApiException("未携带token，请先进行登录", TOKEN_MISSING);
                 }
             }
             // 从Redis 中查看 token 是否过期
@@ -60,10 +61,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             try {
                 claims = TokenUtils.parseJWT(accessToken);
             } catch (ExpiredJwtException e) {
-                response.setStatus(TOKEN_INVALID);
                 throw new ApiException("token失效，请重新登录", TOKEN_INVALID);
             } catch (SignatureException se) {
-                response.setStatus(AUTH_ERROR);
                 throw new ApiException("token令牌错误", AUTH_ERROR);
             }
 
@@ -71,7 +70,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             User user = userService.findUserByAccount(userName);
 
             if (user == null) {
-                response.setStatus(TOKEN_INVALID);
                 throw new ApiException("用户不存在，请重新登录", TOKEN_INVALID);
             }
             // 当前登录用户@CurrentUser

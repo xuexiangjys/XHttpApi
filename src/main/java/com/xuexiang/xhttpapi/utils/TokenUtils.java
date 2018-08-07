@@ -30,7 +30,8 @@ public class TokenUtils {
     public static String createJwtToken(String id) {
         String issuer = "www.github.com";
         String subject = "xuexiangjys@163.com";
-        long ttlMillis = 60 * 60 * 1000; //有效期一小时
+//        long ttlMillis = 60 * 60 * 1000; //有效期一小时
+        long ttlMillis = 30 * 1000; //30秒有效期
         return createJwtToken(id, issuer, subject, ttlMillis);
     }
 
