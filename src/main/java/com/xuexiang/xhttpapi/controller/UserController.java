@@ -32,6 +32,18 @@ public class UserController {
         return new ApiResult<Boolean>().setData(userService.addUser(request.request));
     }
 
+    /**
+     * 注册用户
+     *
+     * @param user
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    public ApiResult registerUser(@RequestBody User user) {
+        return new ApiResult<Boolean>().setData(userService.addUser(user));
+    }
+
     @ResponseBody
     @RequestMapping(value = "/getAllUser/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
     public ApiResult findAllUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
