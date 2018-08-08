@@ -22,6 +22,8 @@
 
 ## 搭建方法
 
+### 方法一 (需要导入项目)
+
 1. clone项目到本地
 
 ```
@@ -41,6 +43,16 @@ git clone https://github.com/xuexiangjys/XHttpApi.git
 * 如果你需要使用mybatis的自动生成代码脚本`generator`，请配置`src/main/resources/init.properties`文件。
 
 4.直接运行`XHttpApiApplication`即可。
+
+### 方法二 (不需要导入项目，直接运行发布程序)
+
+1. clone项目到本地
+
+```
+git clone https://github.com/xuexiangjys/XHttpApi.git
+```
+
+2.直接使用`package`包下的打包好的服务器jar文件运行服务器.详细说明[点击查看](https://github.com/xuexiangjys/XHttpApi/blob/master/package/README.md)
 
 ----------------
 
