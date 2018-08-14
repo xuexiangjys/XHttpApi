@@ -63,6 +63,12 @@ public class BookController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/findBooks", method = RequestMethod.POST)
+    public ApiResult findBooks(int pageNum, int pageSize) {
+        return new ApiResult<List<Book>>().setData(bookService.findAllBook(pageNum, pageSize));
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/getAllBook", method = RequestMethod.GET)
     public ApiResult findAllBook() {
         return new ApiResult<List<Book>>().setData(bookService.findAllBook());

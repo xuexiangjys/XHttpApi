@@ -1,5 +1,6 @@
 package com.xuexiang.xhttpapi.controller;
 
+import com.xuexiang.xhttpapi.api.request.PageQuery;
 import com.xuexiang.xhttpapi.api.response.ApiResult;
 import com.xuexiang.xhttpapi.model.User;
 import com.xuexiang.xhttpapi.api.request.ApiRequest;
@@ -48,6 +49,12 @@ public class UserController {
     @RequestMapping(value = "/getAllUser/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
     public ApiResult findAllUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
         return new ApiResult<List<User>>().setData(userService.findAllUser(pageNum, pageSize));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/findUsers", method = RequestMethod.POST)
+    public ApiResult getUsers(@RequestBody PageQuery pageQuery) {
+        return new ApiResult<List<User>>().setData(userService.findAllUser(pageQuery.pageNum, pageQuery.pageSize));
     }
 
     @ResponseBody

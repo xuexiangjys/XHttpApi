@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author xuexiang
  * @since 2018/8/7 下午5:23
  */
-public class CustomApiResult<T> extends ApiResult<T> {
+public class CustomApiResult<T> {
 
     @JsonProperty(value = "errorCode")
     private int errorCode;
