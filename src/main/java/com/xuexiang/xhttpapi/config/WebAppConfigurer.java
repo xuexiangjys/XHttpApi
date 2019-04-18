@@ -1,6 +1,7 @@
 package com.xuexiang.xhttpapi.config;
 
 import com.xuexiang.xhttpapi.component.token.AuthenticationInterceptor;
+import com.xuexiang.xhttpapi.component.token.CorsInterceptor;
 import com.xuexiang.xhttpapi.component.token.CurrentUserMethodArgumentResolver;
 import com.xuexiang.xhttpapi.component.token.QuickRequestInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +33,9 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
         registry.addInterceptor(quickRequestInterceptor())
                 .addPathPatterns("/authorization/*");
 
+        registry.addInterceptor(corsInterceptor())
+                .addPathPatterns("/*/*");
+
         super.addInterceptors(registry);
     }
 
@@ -59,6 +63,11 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public QuickRequestInterceptor quickRequestInterceptor() {
         return new QuickRequestInterceptor();
+    }
+
+    @Bean
+    public CorsInterceptor corsInterceptor() {
+        return new CorsInterceptor();
     }
 
 }
