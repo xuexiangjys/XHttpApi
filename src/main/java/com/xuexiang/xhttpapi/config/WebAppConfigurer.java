@@ -7,6 +7,7 @@ import com.xuexiang.xhttpapi.component.token.QuickRequestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -32,10 +33,6 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
 
         registry.addInterceptor(quickRequestInterceptor())
                 .addPathPatterns("/authorization/*");
-
-        registry.addInterceptor(corsInterceptor())
-                .addPathPatterns("/*/*");
-
         super.addInterceptors(registry);
     }
 
@@ -43,6 +40,18 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(currentUserMethodArgumentResolver());
         super.addArgumentResolvers(argumentResolvers);
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry
+                .addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedHeaders("Origin, X-Requested-With, Content-Type, Accept")
+                .allowedMethods("GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS")
+                .maxAge(3600);
+        super.addCorsMappings(registry);
     }
 
     @Bean
@@ -63,11 +72,6 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public QuickRequestInterceptor quickRequestInterceptor() {
         return new QuickRequestInterceptor();
-    }
-
-    @Bean
-    public CorsInterceptor corsInterceptor() {
-        return new CorsInterceptor();
     }
 
 }
