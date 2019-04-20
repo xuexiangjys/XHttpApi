@@ -1,7 +1,6 @@
 package com.xuexiang.xhttpapi.config;
 
 import com.xuexiang.xhttpapi.component.token.AuthenticationInterceptor;
-import com.xuexiang.xhttpapi.component.token.CorsInterceptor;
 import com.xuexiang.xhttpapi.component.token.CurrentUserMethodArgumentResolver;
 import com.xuexiang.xhttpapi.component.token.QuickRequestInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -44,12 +43,11 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry
-                .addMapping("/**")
+        registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowCredentials(true)
-                .allowedHeaders("Origin, X-Requested-With, Content-Type, Accept")
-                .allowedMethods("GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS")
+                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept")
+                .allowedMethods("GET", "POST", "PATCH", "DELETE", "PUT")
                 .maxAge(3600);
         super.addCorsMappings(registry);
     }
