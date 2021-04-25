@@ -74,7 +74,6 @@ public class BookController {
         return new ApiResult<List<Book>>().setData(bookService.findAllBook());
     }
 
-
     @PostMapping("/uploadBookPicture")
     public ApiResult uploadBookPicture(@RequestParam("file") MultipartFile file, @RequestParam("bookId") int bookId) throws Exception {
         ApiResult<Boolean> result = new ApiResult<>();

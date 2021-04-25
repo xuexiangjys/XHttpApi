@@ -2,11 +2,12 @@ package com.xuexiang.xhttpapi.controller;
 
 import com.xuexiang.xhttpapi.api.response.ApiResult;
 import com.xuexiang.xhttpapi.api.response.CustomApiResult;
+import com.xuexiang.xhttpapi.model.Book;
+import com.xuexiang.xhttpapi.model.User;
 import com.xuexiang.xhttpapi.utils.DateUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 自定义请求测试api
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/test")
-public class TestCustomRequestController {
+public class TestRequestController {
 
     @ResponseBody
     @RequestMapping(value = "/testCustomResult", method = RequestMethod.GET)
@@ -34,6 +35,20 @@ public class TestCustomRequestController {
     public ApiResult testDataNull() throws Exception {
         return new ApiResult<Boolean>()
                 .setData(null);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/testJsonObject")
+    public ApiResult testJsonObject(@RequestBody User user) throws Exception {
+        return new ApiResult<User>()
+                .setData(user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/testJsonObjectArray")
+    public ApiResult testJsonObjectArray(@RequestBody List<User> users) throws Exception {
+        return new ApiResult<List<User>>()
+                .setData(users);
     }
 
 }
