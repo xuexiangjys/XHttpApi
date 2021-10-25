@@ -1,6 +1,8 @@
 package com.xuexiang.xhttpapi.controller;
 
+import com.xuexiang.xhttpapi.api.request.PageQuery;
 import com.xuexiang.xhttpapi.api.response.ApiResult;
+import com.xuexiang.xhttpapi.api.response.QueryResult;
 import com.xuexiang.xhttpapi.exception.ApiException;
 import com.xuexiang.xhttpapi.model.Book;
 import com.xuexiang.xhttpapi.service.BookService;
@@ -31,6 +33,7 @@ public class BookController {
 
     /**
      * 测试全局异常捕获返回处理
+     *
      * @return
      */
     @ResponseBody
@@ -41,6 +44,7 @@ public class BookController {
 
     /**
      * 这里使用的是json直接注入接收，需要注意的是字段名一定要保持一致
+     *
      * @param book
      * @return
      */
@@ -60,6 +64,14 @@ public class BookController {
     @RequestMapping(value = "/getAllBook/{pageNum}/{pageSize}", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     public ApiResult findAllBook(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
         return new ApiResult<List<Book>>().setData(bookService.findAllBook(pageNum, pageSize));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/findBooksByQueryParam", method = RequestMethod.POST)
+    public ApiResult findBooksByQueryParam(@RequestBody PageQuery pageQuery) {
+        QueryResult<Book> result = new QueryResult<>(pageQuery.pageNum, pageQuery.pageSize);
+        result.setResult(bookService.findAllBook(pageQuery.pageNum, pageQuery.pageSize));
+        return new ApiResult<QueryResult<Book>>().setData(result);
     }
 
     @ResponseBody
