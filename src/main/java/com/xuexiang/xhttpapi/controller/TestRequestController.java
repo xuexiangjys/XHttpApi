@@ -38,6 +38,16 @@ public class TestRequestController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/testCustomApiDataNull", method = RequestMethod.GET)
+    public CustomApiResult testCustomApiDataNull() throws Exception {
+        return new CustomApiResult<Boolean>()
+                .setErrorCode(0)
+                .setErrorInfo("请求成功，但是没有数据")
+                .setTimeStamp(DateUtils.getNowMills())
+                .setResult(null);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/testJsonObject")
     public ApiResult testJsonObject(@RequestBody User user) throws Exception {
         return new ApiResult<User>()
